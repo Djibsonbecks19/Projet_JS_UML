@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <title>Gestion des Dettes</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+            crossorigin="anonymous"
+        />
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <header>
+            <nav class="navbar bg-body-tertiary mb-5">
+                <div class="container-fluid">
+                    <span class="navbar-brand mb-0 h1">Gestion des Dettes</span>
+                </div>
+            </nav>
+        </header>
+        <main>
+            <div class="container">
+                <div class="card mb-4">
+                    <div class="card-header">Clients Endettés</div>
+                    <div class="card-body">
+                        <button id="btnOpenModal" class="btn btn-primary mb-3">
+                            Ajouter un Nouveau Client
+                        </button>
+                        <button id="sort-cat" class="btn btn-primary mb-3"style="cursor: pointer;">
+                            Filter Par catégorie
+                        </button>
+                        <div class="table-responsive">
+                            <table class="table table-light table-bordered">
+                                <thead>
+                                    <tr>
+                                        
+                                        <th>id</th>
+                                        <th>Nom</th>
+                                        <th>Prénom</th>
+                                        <th>Téléphone</th>
+                                        <th>Adresse</th>
+                                        <th>Catégorie </th>
+                                        <th>Actions </th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbodyClients">
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <form id="createModal" class="modal" style="display: none;">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Ajouter un Nouveau Client</h5>
+                            </div>
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label class="form-label">Nom</label>
+                                    <input class="form-control" id="nom" />
+                                    <span id="message1" class="text-danger"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Prénom</label>
+                                    <input class="form-control" id="prenom" />
+                                    <span id="message2" class="text-danger"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Téléphone</label>
+                                    <input class="form-control" id="telephone" />
+                                    <span id="message3" class="text-danger"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Adresse</label>
+                                    <input class="form-control" id="adresse" />
+                                    <span id="message5" class="text-danger"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Categorie</label>
+                                    <input class="form-control" id="categorie" />
+                                    <span id="message6" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" id="closeForm">
+                                    Fermer
+                                </button>
+                                <button type="submit" class="btn btn-primary" id="save">
+                                    Sauvegarder
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <form id="createModal" class="modal" style="display: none;">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Ajouter un Nouveau Client</h5>
+                            </div>
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label class="form-label">Nom</label>
+                                    <input class="form-control" id="nom" />
+                                    <span id="message1" class="text-danger"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Prénom</label>
+                                    <input class="form-control" id="prenom" />
+                                    <span id="message2" class="text-danger"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Téléphone</label>
+                                    <input class="form-control" id="telephone" />
+                                    <span id="message3" class="text-danger"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Adresse</label>
+                                    <input class="form-control" id="adresse" />
+                                    <span id="message5" class="text-danger"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Categorie</label>
+                                    <input class="form-control" id="categorie" />
+                                    <span id="message6" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" id="closeForm">
+                                    Fermer
+                                </button>
+                                <button type="submit" class="btn btn-primary" id="save">
+                                    Sauvegarder
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </main>
+        <footer></footer>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+        <script src="index.js"></script>
+    </body>
+</html>
