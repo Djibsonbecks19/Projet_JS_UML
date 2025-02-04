@@ -90,11 +90,11 @@ const btnOpenModal = document.getElementById('btnOpenModal');
 const createModal = document.getElementById('createModal');
 const closeForm = document.getElementById('closeForm');
 
-const nomInput = document.getElementById('nom');
-const prenomInput = document.getElementById('prenom');
-const telInput = document.getElementById('telephone');
-const adresseInput = document.getElementById('adresse');
-const categorieInput = document.getElementById('categorie');
+let nomElem = document.getElementById('nom')
+let prenomElem = document.getElementById('prenom')
+let telephoneElem = document.getElementById('telephone')
+let adresseElem = document.getElementById('adresse')
+let categorieElem = document.getElementById('categorie')
 
 let ordreCategorie = "asc";
 
@@ -111,7 +111,7 @@ function genereTrClients(clients) {
             <td>${client.telephone}</td>
             <td>${client.adresse}</td>
             <td>${client.categorie}</td>
-            <td><button class="btn btn-primary mb-3" onlick="ClientDetails()">Afficher Infos Clients</button></td>
+            <td><button class="btn btn-primary mb-3">Afficher Infos Clients</button></td>
         </tr>
     `).join('');
 }
@@ -138,55 +138,51 @@ btnOpenModal.addEventListener('click', () => {
 closeForm.addEventListener('click', () => {
     createModal.style.display = "none";
 });
-
 createModal.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    let nomElem = document.getElementById('nom')
-    let prenomElem = document.getElementById('prenom')
-    let telephoneElem = document.getElementById('telephone')
-    let adresseElem = document.getElementById('adresse')
-    let categorieElem = document.getElementById('categorie')
+    let nom = nomElem.value.trim();
+    let prenom = prenomElem.value.trim();
+    let telephone = telephoneElem.value.trim();
+    let adresse = adresseElem.value.trim();
+    let categorie = categorieElem.value.trim();
 
-    let newClient = {
-        id: clients.length + 1, 
-        nom: nomInput.value.trim(),
-        prenom: prenomInput.value.trim(),
-        telephone: telInput.value.trim(),
-        adresse: adresseInput.value.trim(),
-        categorie: categorieInput.value.trim()
-    };
+    if (nom && prenom && telephone && adresse && categorie) {
+        if (clients.some(c => c.telephone === telephone)) {
+            validateForm(telInput, "Téléphone déjà utilisé !");
+            return;
+        }
 
-    if (nomElem.value == '' || prenomElem.value == '' || telephoneElem.value == '' || adresseElem.value == '' ||
-        categorieElem.value == '') {
-            
+        let newClient = {
+            id: clients.length + 1,
+            nom,
+            prenom,
+            telephone,
+            adresse,
+            categorie
+        };
+
+        clients.push(newClient);
+        tbodyClients.innerHTML = genereTrClients(clients);
+
+        nomInput.value = "";
+        prenomInput.value = "";
+        telInput.value = "";
+        adresseInput.value = "";
+        categorieInput.value = "";
+
+        createModal.style.display = "none"; 
+    } else {
         validateForm(nomElem, 'Ce Champ est Obligatoire');
         validateForm(prenomElem, 'Ce Champ est Obligatoire');
         validateForm(telephoneElem, 'Ce Champ est Obligatoire');
         validateForm(adresseElem, 'Ce Champ est Obligatoire');
         validateForm(categorieElem, 'Ce Champ est Obligatoire');
     }
-    if (clients.some(c => c.telephone === newClient.telephone)) {
-        alert("Téléphone déjà utilisé !");
-        return;
-    }
-
-    clients.push(newClient);
-    tbodyClients.innerHTML = genereTrClients(clients);
-
-    nomInput.value = "";
-    prenomInput.value = "";
-    telInput.value = "";
-    adresseInput.value = "";
-    categorieInput.value = "";
-
-    createModal.style.display = "none"; 
 });
 
 
-function ClientDetails(){
-    
-}
+
 
 function validateForm(champ, message){ 
 
