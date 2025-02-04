@@ -10,12 +10,10 @@ let clients = [
             {
                 id: 1,
                 montant: 5000,
-                articles: 7
-                ,
+                articles: 7,
                 statut: "Non soldé"
             }
         ]
-        
     },
     { 
         id: 2, 
@@ -32,7 +30,6 @@ let clients = [
                 statut: "Non soldé"
             }
         ]
-        
     },
     { 
         id: 3, 
@@ -49,7 +46,6 @@ let clients = [
                 statut: "soldé"
             }
         ]
-        
     },
     { 
         id: 4, 
@@ -66,7 +62,6 @@ let clients = [
                 statut: "soldé"
             }
         ]
-        
     },
     { 
         id: 5, 
@@ -85,18 +80,20 @@ let clients = [
         ]
     }
 ];
+
+searchCat = document.getElementById("categorieLookUp")
+searchStatut = document.getElementById("statutLookUp")
+
 const tbodyClients = document.getElementById('tbodyClients');
 const btnOpenModal = document.getElementById('btnOpenModal');
 const createModal = document.getElementById('createModal');
 const closeForm = document.getElementById('closeForm');
 
-let nomElem = document.getElementById('nom')
-let prenomElem = document.getElementById('prenom')
-let telephoneElem = document.getElementById('telephone')
-let adresseElem = document.getElementById('adresse')
-let categorieElem = document.getElementById('categorie')
-
-let ordreCategorie = "asc";
+let nomElem = document.getElementById('nom');
+let prenomElem = document.getElementById('prenom');
+let telephoneElem = document.getElementById('telephone');
+let adresseElem = document.getElementById('adresse');
+let categorieElem = document.getElementById('categorie');
 
 document.addEventListener("DOMContentLoaded", () => {
     tbodyClients.innerHTML = genereTrClients(clients);
@@ -111,25 +108,12 @@ function genereTrClients(clients) {
             <td>${client.telephone}</td>
             <td>${client.adresse}</td>
             <td>${client.categorie}</td>
+            <td>${client.dettes.map(dette => dette.statut)}</td>
             <td><button class="btn btn-primary mb-3">Afficher Infos Clients</button></td>
         </tr>
     `).join('');
 }
 
-function sortClients(clients, ordre, colonne) {
-    clients.sort((a, b) => {
-        if (a[colonne] < b[colonne]) return ordre === "asc" ? -1 : 1;
-        if (a[colonne] > b[colonne]) return ordre === "asc" ? 1 : -1;
-        return 0;
-    });
-
-    tbodyClients.innerHTML = genereTrClients(clients);
-}
-
-document.getElementById('sort-cat').addEventListener('click', () => {
-    ordreCategorie = ordreCategorie === "asc" ? "desc" : "asc";
-    sortClients(clients, ordreCategorie, "categorie");
-});
 
 btnOpenModal.addEventListener('click', () => {
     createModal.style.display = "block";
@@ -138,6 +122,7 @@ btnOpenModal.addEventListener('click', () => {
 closeForm.addEventListener('click', () => {
     createModal.style.display = "none";
 });
+
 createModal.addEventListener('submit', (e) => {
     e.preventDefault();
 
@@ -149,7 +134,7 @@ createModal.addEventListener('submit', (e) => {
 
     if (nom && prenom && telephone && adresse && categorie) {
         if (clients.some(c => c.telephone === telephone)) {
-            validateForm(telInput, "Téléphone déjà utilisé !");
+            validateForm(telephoneElem, "Téléphone déjà utilisé !");
             return;
         }
 
@@ -165,11 +150,11 @@ createModal.addEventListener('submit', (e) => {
         clients.push(newClient);
         tbodyClients.innerHTML = genereTrClients(clients);
 
-        nomInput.value = "";
-        prenomInput.value = "";
-        telInput.value = "";
-        adresseInput.value = "";
-        categorieInput.value = "";
+        nomElem.value = "";
+        prenomElem.value = "";
+        telephoneElem.value = "";
+        adresseElem.value = "";
+        categorieElem.value = "";
 
         createModal.style.display = "none"; 
     } else {
@@ -181,19 +166,33 @@ createModal.addEventListener('submit', (e) => {
     }
 });
 
-
-
-
-function validateForm(champ, message){ 
-
+function validateForm(champ, message) { 
     let sibling = champ.nextElementSibling; 
-    if(champ.value == ''){
+    if (!champ.value.trim()) {
         sibling.style.display = 'block';
         sibling.innerHTML = message;
+        setTimeout(() => {
+            sibling.style.display = 'none';
+        }, 3000);
     }
-    setTimeout(() => {
-        sibling.style.display = 'none';
-    },3000);
-
 }
+
+function lookUp(column, id) {
+    id.addEventListener("change", function () {
+        const lookupValue = this.value.trim().toLowerCase(); 
+        const tableRows = document.querySelectorAll("table tbody tr");  
+
+        tableRows.forEach((row) => {
+            const Cell = row.cells[column];  
+            if (Cell) {
+                const Text = Cell.textContent.trim().toLowerCase();  
+
+                row.style.display = (lookupValue === "" || Text === lookupValue) ? "" : "none";
+            }
+        });
+    });
+}
+
+lookUp(6, document.getElementById("statutLookUp"));
+lookUp(5, document.getElementById("categorieLookUp"));
 

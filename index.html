@@ -28,9 +28,26 @@
                         <button id="btnOpenModal" class="btn btn-primary mb-3">
                             Ajouter un Nouveau Client
                         </button>
-                        <button id="sort-cat" class="btn btn-primary mb-3"style="cursor: pointer;">
-                            Filter Par catégorie
-                        </button>
+                        <div class="mb-3">
+                            <label class="form-label">Filter par Catégorie</label>
+                            <select class="form-control" id="categorieLookUp">
+                                <option value="">Sélectionner une Catégorie</option>
+                                <option value="Fidèle">Fidèle</option>
+                                <option value="Solvable">Solvable</option>
+                                <option value="Non solvable">Non solvable</option>
+                                <option value="Nouveau">Nouveau</option>
+                            </select>                            
+                            <span class="text-danger" id="message6"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Filter par statut de dette</label>
+                            <select class="form-control" id="statutLookUp">
+                                <option value="">Sélectionner un statut</option>
+                                <option value="Non soldé">Non soldé</option>
+                                <option value="soldé">soldé</option>
+                            </select>                            
+                            <span class="text-danger" id="message6"></span>
+                        </div>
                         <div class="table-responsive">
                             <table class="table table-light table-bordered">
                                 <thead>
@@ -42,6 +59,7 @@
                                         <th>Téléphone</th>
                                         <th>Adresse</th>
                                         <th>Catégorie </th>
+                                        <th>Dettes </th>
                                         <th>Actions </th>
                                     </tr>
                                 </thead>
@@ -52,50 +70,6 @@
                         </div>
                     </div>
                 </div>
-                <form id="createModal" class="modal" style="display: none;">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Ajouter un Nouveau Client</h5>
-                            </div>
-                            <div class="modal-body">
-                                <div class="mb-3">
-                                    <label class="form-label">Nom</label>
-                                    <input class="form-control" id="nom" />
-                                    <span id="message1" class="text-danger"></span>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Prénom</label>
-                                    <input class="form-control" id="prenom" />
-                                    <span id="message2" class="text-danger"></span>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Téléphone</label>
-                                    <input class="form-control" id="telephone" />
-                                    <span id="message3" class="text-danger"></span>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Adresse</label>
-                                    <input class="form-control" id="adresse" />
-                                    <span id="message5" class="text-danger"></span>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Categorie</label>
-                                    <input class="form-control" id="categorie" />
-                                    <span id="message6" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" id="closeForm">
-                                    Fermer
-                                </button>
-                                <button type="submit" class="btn btn-primary" id="save">
-                                    Sauvegarder
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
 
                 <form id="createModal" class="modal" style="display: none;">
                     <div class="modal-dialog">
@@ -104,27 +78,27 @@
                                 <h5 class="modal-title">Ajouter un Nouveau Client</h5>
                             </div>
                             <div class="modal-body">
-                                <div class="mb-3">
+                                <div class="mb-1">
                                     <label class="form-label">Nom</label>
                                     <input class="form-control" id="nom" />
                                     <span id="message1" class="text-danger"></span>
                                 </div>
-                                <div class="mb-3">
+                                <div class="mb-1">
                                     <label class="form-label">Prénom</label>
                                     <input class="form-control" id="prenom" />
                                     <span id="message2" class="text-danger"></span>
                                 </div>
-                                <div class="mb-3">
+                                <div class="mb-1">
                                     <label class="form-label">Téléphone</label>
                                     <input class="form-control" id="telephone" />
                                     <span id="message3" class="text-danger"></span>
                                 </div>
-                                <div class="mb-3">
+                                <div class="mb-1">
                                     <label class="form-label">Adresse</label>
                                     <input class="form-control" id="adresse" />
                                     <span id="message5" class="text-danger"></span>
                                 </div>
-                                <div class="mb-3">
+                                <div class="mb-1">
                                     <label class="form-label">Catégorie</label>
                                     <select class="form-control" id="categorie">
                                         <option value="Fidèle">Fidèle</option>
